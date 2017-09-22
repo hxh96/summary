@@ -1,0 +1,1 @@
+建议将方法放在common公共function里面,使用时控制器可直接调用isMobile();

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>日</th>
+        <th>一</th>
+        <th>二</th>
+        <th>三</th>
+        <th>四</th>
+        <th>五</th>
+        <th>六</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="list" id="v">
+        <tr>
+            <!--构建日历-->
+            <for start="0" end="7">
+                <if condition="$v[$i] eq $d">
+                    <!--当前日期-->
+                    <td style="color: #17ffe6;background: #3880a9;">{$v.$i}</td>
+                    <else />
+                    <!--其他日期-->
+                    <td style="background: #f0f7fc;color: #14ff83;">{$v.$i}</td>
+                </if>
+            </for>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+</body>
+</html>

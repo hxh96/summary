@@ -1,0 +1,23 @@
+解压后放在ThinkPHP/Library/Vendor 下面.
+
+
+控制器中:
+
+		$mobile = $_POST['mobile'];//获取手机号码
+                /************引入*************/
+                Vendor('Alidayu.TopClient');
+                Vendor('Alidayu.AlibabaAliqinFcSmsNumSendRequest');
+                Vendor('Alidayu.ResultSet');
+                Vendor('Alidayu.RequestCheckUtil');
+                $c = new \Vendor\Alidayu\TopClient;
+                $req = new \Vendor\Alidayu\AlibabaAliqinFcSmsNumSendRequest;
+                /*************配置***************/
+                $code =  rand('100000','999999');//随机验证码
+                $c->appkey = '';
+                $c->secretKey = '';
+                $req->setSmsType("normal");//类型(normal短信)
+                $req->setSmsFreeSignName("");//签名名称
+                $req->setSmsParam("{code:'$code'}");//验证码
+                $req->setRecNum("$mobile");//接受短信的手机号
+                $req->setSmsTemplateCode("");//短信模板ID
+                $c->execute($req);//发送短信

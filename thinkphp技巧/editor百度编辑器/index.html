@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="__JS__/jquery.js"></script>
+    <script src="__JS__/kindeditor/kindeditor-all.js"></script>
+    <script src="__JS__/kindeditor/lang/zh_CN.js"></script>
+</head>
+<body>
+        <textarea name="about" class="input w50" rows="20" id="editor_tp"></textarea>
+<script>
+    // 6.2
+    KindEditor.options.filterMode = false;
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#editor_tp',{
+            afterBlur : function(){this.sync();}});
+    });
+
+</script>
+</body>
+</html>

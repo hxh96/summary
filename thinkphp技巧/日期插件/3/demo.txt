@@ -1,0 +1,7 @@
+引入 css   和  js   文件  
+
+
+使用input框
+
+
+<input placeholder="请选择" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">

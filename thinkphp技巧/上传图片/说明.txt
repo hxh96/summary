@@ -1,0 +1,14 @@
+必须先在项目根目录创建Upload文件夹,否则无法实现效果
+
+
+如果想实现多文件上传请看以下操作
+
+1.注释index.html文件  13行  和  33行
+
+2.在34行后面加上以下代码
+	
+	var html = '<input class="file_upload_image" name="img[]" type="hidden" multiple="true" value="'+obj.data+'">';
+        $('#upload_org_code_img').after(html);
+
+
+3.控制器里面接受到的将会是一个数组,将数组循环保存到数据库即可.

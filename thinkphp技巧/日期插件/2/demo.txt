@@ -1,0 +1,7 @@
+引入 css   和  js   文件  
+
+
+使用input框 id命名为 下面查找的id
+
+
+$("#date").dateSelect();

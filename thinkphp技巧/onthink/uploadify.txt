@@ -1,0 +1,52 @@
+<block name="style">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+</block>
+
+
+
+<div class="controls">
+            <label class="item-label">封面</label>
+            <input type="file" id="upload_picture">
+            <input type="hidden" name="img" id="img" value="{$info['img']|default=''}"/>
+            <div class="upload-img-box">
+                <notempty name="info['img']">
+                    <div class="upload-pre-item"><img src="__ROOT__{$info.img|get_cover='path'}"/></div>
+                </notempty>
+            </div>
+        </div>
+        <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'	  : 1,
+                'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+//                    console.log(data.path);
+                    $("#img").val(data.path);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#img").parent().find('.upload-img-box').html(
+                            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+        </script>

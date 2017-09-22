@@ -1,0 +1,11 @@
+建议将方法放在common公共function里面,使用时控制器可直接调用date_list("当前年份","当前月份");
+
+
+控制器中:
+ 	$y = date('Y');
+        $m = date('m');
+        $d['d'] = date('d');
+        $list = date_list($y,$m);
+        $this->assign('list',$list);
+        $this->assign($d);
+	$this->display();

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="__CSS__/uploadify.css">
+    <script src="__JS__/jquery.js"></script>
+    <script src="__JS__/jquery.uploadify.js"></script>
+</head>
+<body>
+    <input id="file_upload"  type="file" multiple="true" class="button">
+    <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
+    <input id="file_upload_image" name="img" type="hidden" multiple="true">
+<script>
+    $(function() {
+        $('#file_upload').uploadify({
+            'swf'      : '__SWF__/uploadify.swf',
+            'uploader' : "{:U('UploadImg/index')}",
+            'buttonText': '上传图片',
+            'fileTypeDesc': 'Image Files',
+            'fileObjName' : 'file',
+            //允许上传的文件后缀
+            'fileTypeExts': '*.gif; *.jpg; *.png; *.bmp; *.jpeg;',
+            'onUploadSuccess' : function(file,data,response) {
+                // response true ,false
+                if(response) {
+                    var obj = JSON.parse(data); //由JSON字符串转换为JSON对象
+
+                    console.log(data);
+                    $('#' + file.id).find('.data').html(' 上传完毕');
+                    //return dialog.toconfirm('上传完毕');
+                    $("#upload_org_code_img").attr("src",obj.data);
+                    $("#file_upload_image").attr('value',obj.data);
+                    $("#upload_org_code_img").show();
+                }else{
+                    //alert('上传失败');
+                    return dialog.error('上传失败1');
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

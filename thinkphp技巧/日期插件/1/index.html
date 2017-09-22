@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="__JS__/jquery.js"></script>
+    <script type="text/javascript" src="__JS__/jedate.js"></script>
+</head>
+<body>
+    <input class="datainp input w50" name="starttime" id="dateinfo" type="text" placeholder="请选择" value="" readonly>
+
+<script>
+
+    jeDate({
+        dateCell:"#dateinfo",
+        format:"YYYY-MM-DD hh:mm:ss",
+        isinitVal:true,
+        isTime:true, //isClear:false,
+        minDate:"2014-09-19 00:00:00",
+        okfun:function(val){}
+    });
+
+</script>
+</body>
+</html>

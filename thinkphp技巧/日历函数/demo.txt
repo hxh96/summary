@@ -1,0 +1,45 @@
+/*
+ *日历函数
+ * year 年份
+ * month 月份
+ * day 日期
+ */
+ function date_list( $year='' , $month='' ){
+
+            $year  = (empty($year))?$year:date('Y');      //获得年份，例如2006 
+
+            $month = (empty($month))?$month:date('n');     //获得月份，例如04  
+
+            $day   = date('j');       //获得日期，例如3
+
+            //获得当月的总天数  
+            $daysInMonth = date("t",mktime(0,0,0,$month,1,$year));
+
+            //获得每个月的第一天，例如4  
+            $firstDay = date("w", mktime(0,0,0,$month,1,$year)); 
+
+            //计算数组中的日历表格数  
+            $tempDays = $firstDay + $daysInMonth; 
+
+            //获得表格行数  
+            $weeksInMonth = ceil($tempDays/7);
+
+            //遍历得到日历
+            $week  = array();
+            $counter = 0;
+                for($j = 0;$j < $weeksInMonth; $j++)   
+                    {  
+                        for($i=0;$i < 7 ;$i++)   
+                        {  
+                            $counter ++;  
+                            $week [$j] [$i] = $counter;
+                            //日期偏移量  
+                            $week [$j] [$i] -= $firstDay;  
+                            if (($week [$j] [$i] < 1) || ($week [$j] [$i] > $daysInMonth)) {  
+                                $week [$j] [$i] = "";  
+                            }    
+                        }  
+                    }
+            
+            return $week;
+   }

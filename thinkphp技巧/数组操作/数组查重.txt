@@ -1,0 +1,18 @@
+/*
+ *数组查重
+ *data---对象数组
+ *有重复返回FALSE，没有重复返回TRUE
+ */
+ function array_repeat( $data ){
+
+    $arr = array_count_values($data);
+
+    foreach ($arr as $key => $value) {
+
+      if($value >=2){
+
+        return false;
+      }
+    }
+    return true;
+ }

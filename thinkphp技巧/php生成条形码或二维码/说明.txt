@@ -1,0 +1,6 @@
+将目录直接放在项目根目录下面
+
+
+视图中:
+
+<img src="/Barcode/test.php?text='内容'&code_size='条形码大小'&text_size='内容大小'">

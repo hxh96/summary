@@ -1,0 +1,3 @@
+http://www.jb51.net/article/72561.htm    //安装流程及安装包下载
+
+http://www.jb51.net/article/73492.htm    //php支持sql server
