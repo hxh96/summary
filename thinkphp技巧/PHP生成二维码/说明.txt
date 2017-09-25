@@ -1,0 +1,24 @@
+把  phpqrcode文件夹  存放至ThinkPHP/Library/Vendor/文件夹下面
+
+
+
+控制器中:
+
+    //生成二维码
+    public function qrcode(){
+        $url=I('get.url');//地址
+        $level=I('get.level',3,int);//水平
+        $size=I('get.size',4,int);//大小
+        Vendor('phpqrcode.phpqrcode');
+        $errorCorrectionLevel =intval($level) ;//容错级别
+        $matrixPointSize = intval($size);//生成图片大小
+        //生成二维码图片
+        //echo $_SERVER['REQUEST_URI'];
+        $object = new \QRcode();
+        $object->png('http://'.$url, false, $errorCorrectionLevel, $matrixPointSize, 2);
+    }
+
+
+视图中:
+
+<img src="{:U('Index/qrcode',['url'=>'www.hao123.com'])}">
