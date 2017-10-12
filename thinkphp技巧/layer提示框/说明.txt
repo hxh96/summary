@@ -1,0 +1,14 @@
+丢到项目下面,引入两个js文件
+
+
+layer/layer.js
+dialog.js
+
+
+成功:return dialog.success('提示信息',url);
+
+
+失败:return dialog.error('错误提示');
+
+
+其他请看:dialog.js
