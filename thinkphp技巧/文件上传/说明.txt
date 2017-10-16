@@ -10,3 +10,7 @@
 
 
 参数文档:  http://blog.csdn.net/u011120720/article/details/51348526
+
+
+
+注意修改 php.ini   中的   upload_max_filesize   和   post_max_size  这两个配置参数!!!!!!!!!!!!!!!!!
