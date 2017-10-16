@@ -27,9 +27,12 @@
                 // response true ,false
                 if(response) {
                     var obj = JSON.parse(data); //由JSON字符串转换为JSON对象
-
                     console.log(data);
-                    $('#' + file.id).find('.data').html(' 上传完毕');
+                    if(obj.status == "1"){
+                        $('#' + file.id).find('.data').html('上传成功');
+                    }else {
+                        $('#' + file.id).find('.data').html('上传失败');
+                    }
                     //return dialog.toconfirm('上传完毕');
 
                     $("#file_upload_file").attr('value',obj.data);
