@@ -1,0 +1,75 @@
+将压缩包解压，拷贝出文件夹“api_sdk”，并将文件夹重命名为“dysms”，放入自己的项目目录
+
+
+
+在控制器中引入:
+use Aliyun\Core\Config;  
+use Aliyun\Core\Profile\DefaultProfile;  
+use Aliyun\Core\DefaultAcsClient;  
+use Aliyun\Api\Sms\Request\V20170525\SendSmsRequest;  
+
+
+
+编写方法:
+/**
+     * 发送验证码
+     * @param string $mobile    接收手机号
+     * @param string $code      验证码
+     * @return array
+     */
+    public function sendMsg()
+    {
+
+        if (IS_AJAX) {
+            $mobile = I('get.mobile');
+
+            $code = rand('100000', '999999');//随机验证码
+
+            S('mobileCode', $mobile . $code);
+
+            require_once '/dysms/vendor/autoload.php';
+            Config::load();             //加载区域结点配置
+
+            $config = C('dysms');       //取出参数配置
+
+            $accessKeyId = ''; //KeyId
+            $accessKeySecret = ''; //KeySecret
+            $templateParam = array("code" => $code);           //模板变量替换
+
+            //短信API产品名（短信产品名固定，无需修改）
+            $product = "Dysmsapi";
+            //短信API产品域名（接口地址固定，无需修改）
+            $domain = "dysmsapi.aliyuncs.com";
+            //暂时不支持多Region（目前仅支持cn-hangzhou请勿修改）
+            $region = "cn-hangzhou";
+
+            // 初始化用户Profile实例
+            $profile = DefaultProfile::getProfile($region, $accessKeyId, $accessKeySecret);
+            // 增加服务结点
+            DefaultProfile::addEndpoint("cn-hangzhou", "cn-hangzhou", $product, $domain);
+            // 初始化AcsClient用于发起请求
+            $acsClient = new DefaultAcsClient($profile);
+
+            // 初始化SendSmsRequest实例用于设置发送短信的参数
+            $request = new SendSmsRequest();
+            // 必填，设置雉短信接收号码
+            $request->setPhoneNumbers($mobile);
+
+            // 必填，设置签名名称
+            $request->setSignName('xxx');//签名
+
+            // 必填，设置模板CODE
+            $request->setTemplateCode('xxx');//模板code
+
+            // 可选，设置模板参数
+            if ($templateParam) {
+                $request->setTemplateParam(json_encode($templateParam));
+            }
+
+            //发起访问请求
+            $acsResponse = $acsClient->getAcsResponse($request);
+
+            $return['code'] = 100;
+            $this->ajaxReturn($return);
+        }
+    }
