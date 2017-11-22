@@ -1,0 +1,23 @@
+    //微信api接入验证
+    public function index()
+    {
+        //获得几个参数
+        $token     = 'xxxxx';//此处填写之前开发者配置的token
+        $nonce     = $_GET['nonce'];
+        $timestamp = $_GET['timestamp'];
+        $echostr   = $_GET['echostr'];
+        $signature = $_GET['signature'];
+        //参数字典序排序
+        $array = array();
+        $array = array($nonce, $timestamp, $token);
+        sort($array);
+        //验证
+        $str = sha1( implode( $array ) );//sha1加密
+        //对比验证处理好的str与signature,若确认此次GET请求来自微信服务器，请原样返回echostr参数内容，则接入生效，成为开发者成功，否则接入失败。
+        if( $str  == $signature && $echostr ){
+            //第一次接入微信api有echostr这个参数，之后就没有了
+            echo  $echostr;
+        } else {
+            //接入成功后的其他处理
+        }
+    }
