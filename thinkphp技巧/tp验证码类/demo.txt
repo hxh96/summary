@@ -1,0 +1,16 @@
+/*
+*—È÷§¬Î
+*/    
+    public function ver(){
+            $yzm = new \Think\Verify();
+            $yzm->useCurve = false;
+            $yzm->useNoise = false;
+            $yzm->length   = 4;
+            $yzm->fontSize = 50;
+            $yzm->entry(); 
+    }
+
+
+
+ ”Õº:
+<img src="{:U('Login/ver')}"/>
