@@ -10,7 +10,7 @@
             $yzm->entry(); 
     }
 
-
+   
 
 йсм╪:
 <img src="{:U('Login/ver')}"/>
