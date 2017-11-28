@@ -1,0 +1,51 @@
+控制器里面:
+
+        //获取配置分配到页面
+        $signPackage = A('Jssdk')->GetSignPackage();
+        $this->assign($signPackage);
+
+
+
+视图中:
+		
+		//引入js文件
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+		<script type="application/javascript">
+							wx.config({
+								debug: false,
+								appId: '{$appId}',
+								timestamp: '{$timestamp}',
+								nonceStr: '{$nonceStr}',
+								signature: '{$signature}',
+								jsApiList: [
+									'scanQRCode'
+								]
+							});
+							$("#scanQRCode").click(function() {
+								wx.ready(function () {
+									// 9.1.2 扫描二维码并返回结果
+									wx.scanQRCode({
+										needResult: 1,
+										desc: 'scanQRCode desc',
+										success: function (res) {
+											//执行扫码结果
+											location.href = res.resultStr;
+										}
+									});
+								});
+
+								wx.error(function (res) {
+									//alert(res.errMsg);
+								});
+
+								$(document).ready(function(){
+									//$("#scanQRCode1").fadeIn();
+									//$("#scanQRCode1").fireEvent("onclick");
+									//document.getElementById("scanQRCode1").fireEvent("onclick");
+									//document.getElementById("scanQRCode1").onclick();
+									//document.getElementById("scanQRCode1").click();
+									//alert(1);
+								});
+							});
+						</script>
