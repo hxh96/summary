@@ -1,0 +1,15 @@
+
+//$lists   一个二维数组
+function remove($lists)
+    {
+        //过滤掉内容中的图片
+        foreach($lists as &$list){
+            //用正则匹配提取图片html标签
+            $pattern="/<[img|IMG].*?src=[\'\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
+            //替换内容设置为空
+            $replacement = '';
+            //用preg_replace()函数将匹配到的内容替换为$replacement.并且输出
+            $list['content'] =  preg_replace($pattern,$replacement ,$list['content']);
+        }
+        return $lists;
+    }
