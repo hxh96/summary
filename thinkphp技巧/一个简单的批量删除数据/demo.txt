@@ -1,0 +1,59 @@
+一个简单的批量删除多条数据
+<form action="manydel" method="post">
+{volist name="data" id="value"}
+<tr>
+
+
+
+
+<td><input name='id[]' type="checkbox" value={$value.id}></td>
+<td>{$value.id}</td>
+<td>{$value.name}</td>
+<td>{$value.sex}</td>
+<td>{$value.pass}</td>
+<td>{$value.email}</td>
+<td>{$value.time}</td>
+
+<td><a href="edit?id={$value.id}" class="btn btn-primary btn-sm">修改</a>  <a href="delete?id={$value.id}" class="btn btn-primary btn-sm">删除</a></td>
+
+
+
+</tr>
+
+
+
+
+
+
+{/volist}
+<input type="submit" class="btn btn-primary btn-sm" value="批量删除"></input>
+</form>
+
+
+
+
+
+//批量删除数据
+
+public function manydel(){
+
+$id=input('post.');//获取所有传过来的id
+
+foreach($id as $k=>$v){//遍历数组中的值
+
+$del=Db::name('user')->delete($v);//删除遍历出来的与数据库相关的数据记录
+
+if($del){//为真则删除成功
+
+$this->success('批量删除成功！','index/main');
+}else{//否则删除失败
+
+$this->success('批量删除成功！','index/main');
+}
+
+}
+
+
+}
+
+//批量删除数据结束
