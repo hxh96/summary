@@ -13,4 +13,18 @@
    
 
 视图:
-<img src="{:U('Login/ver')}"/>
+<img src="{:U('Login/ver')}" id="img"/>
+
+
+
+js:
+
+var verify = $("#img").attr('src');
+$("#img").click(function(){  //验证码点击刷新
+   if( verify.indexOf('?')>0){
+	$("#img").attr("src", verify+'&random='+Math.random());
+   }
+   else{
+	$("#img").attr("src", verify.replace(/\?.*$/,'')+'?'+Math.random());
+   }
+});
