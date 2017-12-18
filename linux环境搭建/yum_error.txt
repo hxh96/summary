@@ -1,0 +1,12 @@
+
+执行yum命令时，提示“Another app is currently holding the yum lock; waiting for it to exit…”等错误字样。这是因为yum被锁定无法使用导致的。
+错误信息参考：
+Another app is currently holding the yum lock; waiting for it to exit...
+The other application is: yum
+Memory :  40 M RSS ( 50 MB VSZ)
+Started: Thu Jul 19 01:59:25 2012 - 03:45 ago
+State  : Uninteruptable, pid: 903
+
+解决方案：
+rm -rf /var/run/yum.pid
+SSH执行以上命令，删除yum.pid强行解除锁定即可。
