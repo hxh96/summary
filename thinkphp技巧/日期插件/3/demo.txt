@@ -4,4 +4,7 @@
 使用input框
 
 
-<input placeholder="请选择" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+<input placeholder="请选择" id="Time" class="laydate-icon" onClick="laydate({elem: '#Time',istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+
+
+多次使用的话要修改  id和elem   ,不然会导致混乱.
