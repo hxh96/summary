@@ -25,3 +25,6 @@
 <div class="pagelist">
 	{$page}
 </div>
+
+
+样式同demo1一样.
