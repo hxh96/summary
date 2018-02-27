@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              if(clientWidth>=640){
+                  docEl.style.fontSize = '100px';
+              }else{
+                  docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+              }
+          };
+
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+	<title>wxpay</title>
+    </head>
+  <body>
+	
+		<div class="pay" style="margin:0 auto">
+			<img src="{$Think.config.IMG_URL}payend.png"/ id="zhifu" style="margin:0 auto;width:237px;height:72px;">
+		</div>
+  </body>
+  <script>
+  	onload=function() {
+		  document.getElementById('zhifu').addEventListener('touchstart',function() {
+			  	if (typeof WeixinJSBridge == "undefined"){
+				    if( document.addEventListener ){
+				      document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+				    }else if (document.attachEvent){
+				      document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+				      document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+				    }
+			  	}else{
+			   	 	jsApiCall();
+			  	}
+				function jsApiCall() {
+					WeixinJSBridge.invoke(
+					    'getBrandWCPayRequest',
+					    {$jsApiParameters},
+					    function(res){
+					      WeixinJSBridge.log(res.err_msg);
+					      if(res.err_msg.indexOf('ok')!=-1){
+					      	localStorage.clear();
+					   		location.href='{:U('index')}'
+					      }
+					    }
+					);
+				}
+		  }); 		
+  	}
+	</script>
+	
+ </html>
