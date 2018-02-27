@@ -1,0 +1,27 @@
+﻿
+/**
+     * 分页工具
+     * @param $lists  数组
+     * @param $pageSize  每页显示条数
+     * @return array
+     */
+    public function Page($lists,$pageSize)
+    {
+        import('ORG.Util.Page');// 导入分页类
+        $count=count($lists);//得到数组元素个数
+        $Page= new \Think\Page($count,$pageSize);// 实例化分页类 传入总记录数和每页显示的记录数
+        $lists = array_slice($lists,$Page->firstRow,$Page->listRows);
+        $show = $Page->show();// 分页显示输出﻿
+        $arr = array(
+            'lists' =>$lists,
+            'page'=>$show."总记录数:".$count."条,每页显示记录数:".$pageSize."条"
+        );
+        return  $arr;
+    }
+
+
+
+<!--视图中-->
+<div class="pagelist">
+	{$page}
+</div>
