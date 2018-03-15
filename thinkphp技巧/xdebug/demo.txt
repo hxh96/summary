@@ -1,0 +1,2 @@
+如果没有安装，安装操作Xdebug如下： 
+将phpinfo();的信息全部输入网址：http://xdebug.org/wizard.php中的框，得到适配的xdebug版本
